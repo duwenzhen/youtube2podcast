@@ -67,20 +67,20 @@ def register_tools(mcp):
             after processing by gemini, return the response from Gemini
         """
         return await tools_gemini_api.get_response_from_gemini_youtube(prompt, youtubeURL)
-
-    @mcp.tool()
-    async def instruction_to_gemini_pro_model(prompt: str):
-        """
-        Send the instruction to Gemini pro model
-
-        This MCP tool allows AI models to send the prompt to Gemini pro model
-
-        Args:
-            prompt: the instruction that need to be send to Gemini pro model(e.g., please summarize this text)
-        Returns:
-            after processing by gemini, return the response from Gemini
-        """
-        return await tools_gemini_api.get_response_from_pro_model(prompt)
+    #
+    # @mcp.tool()
+    # async def instruction_to_gemini_pro_model(prompt: str):
+    #     """
+    #     Send the instruction to Gemini pro model
+    #
+    #     This MCP tool allows AI models to send the prompt to Gemini pro model
+    #
+    #     Args:
+    #         prompt: the instruction that need to be send to Gemini pro model(e.g., please summarize this text)
+    #     Returns:
+    #         after processing by gemini, return the response from Gemini
+    #     """
+    #     return await tools_gemini_api.get_response_from_pro_model(prompt)
 
     @mcp.tool()
     async def instruction_to_gemini_TTS_model(prompt: str):

@@ -3,6 +3,7 @@ import asyncio
 import os
 # Add json import for formatting output
 import json
+import time
 from datetime import datetime
 from google import genai
 from google.genai import types
@@ -30,6 +31,7 @@ server_params = StdioServerParameters(
 
 
 async def run(prompt_content):
+    time.sleep(60)
     # Remove debug prints
     async with stdio_client(server_params) as (read, write):
         async with ClientSession(read, write) as session:
@@ -67,6 +69,7 @@ async def run(prompt_content):
                 ),
             )
 
+            time.sleep(60)
             # Remove raw response print
             if response.candidates[0].content.parts[0].function_call:
                 function_call = response.candidates[0].content.parts[0].function_call

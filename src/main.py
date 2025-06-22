@@ -123,7 +123,7 @@ Send the instruction below to gemini flash model :
 f"""
 Send the instruction below to gemini TTS model :
 -- START of INSTRUCTION --
-Below this the playbook and transcript for a podcast, generate a podcast from it :
+Below this the transcript for a podcast, generate a podcast from it in French:
 {playbook}
 -- END of INSTRUCTION --
 """

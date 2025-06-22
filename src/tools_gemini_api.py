@@ -53,18 +53,33 @@ def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
 
 async def get_response_from_text_to_sppech_model(prompt : str):
     response = client.models.generate_content(
-        model="gemini-2.5-flash-preview-tts",  # Your specified model
-        contents=prompt,  # Pass the prepared content here
+        model="gemini-2.5-flash-preview-tts",
+        contents=prompt,
         config=types.GenerateContentConfig(
             response_modalities=["AUDIO"],
             speech_config=types.SpeechConfig(
-                voice_config=types.VoiceConfig(
-                    prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name='Kore',
-                    )
+                multi_speaker_voice_config=types.MultiSpeakerVoiceConfig(
+                    speaker_voice_configs=[
+                        types.SpeakerVoiceConfig(
+                            speaker='Joe',
+                            voice_config=types.VoiceConfig(
+                                prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                    voice_name='Kore',
+                                )
+                            )
+                        ),
+                        types.SpeakerVoiceConfig(
+                            speaker='Jane',
+                            voice_config=types.VoiceConfig(
+                                prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                    voice_name='Puck',
+                                )
+                            )
+                        ),
+                    ]
                 )
-            ),
-        ),
+            )
+        )
     )
     data = response.candidates[0].content.parts[0].inline_data.data
     filename = "out.wav"
