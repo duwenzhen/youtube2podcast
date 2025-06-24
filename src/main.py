@@ -16,11 +16,16 @@ import prompt_cons
 import gemini_mcpclient
 
 # youtube_url = "https://www.youtube.com/watch?v=0lJKucu6HJc"
-youtube_url = "https://www.youtube.com/watch?v=7mCQHeXq1Mg"
+# youtube_url = "https://www.youtube.com/watch?v=7mCQHeXq1Mg"
 
 
 if __name__ == "__main__":
 
+   search_prompt = "I am looking for a youtube video about the T100 San Francisco 2024"
+
+
+   results = asyncio.run(gemini_mcpclient.run(search_prompt))
+   youtube_url = results.content[0].text
    prompt0 =  f"""
       Send the instruction below to gemini youtube model :
       -- START of INSTRUCTION --
@@ -71,7 +76,7 @@ Send the instruction below to gemini flash model :
 f"""
 Send the instruction below to gemini TTS model :
 -- START of INSTRUCTION --
-Below this the transcript for a podcast, generate a podcast from it in non native speaker English:
+Below this the transcript for a podcast, generate a podcast from it:
 {playbook}
 -- END of INSTRUCTION --
 """

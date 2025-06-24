@@ -9,6 +9,9 @@ from mcp.server.fastmcp import FastMCP
 import argparse
 import tools_gemini_api
 from mylogging import logger
+import tools_youtube_api
+
+
 DEFAULT_PORT = 3001
 DEFAULT_CONNECTION_TYPE = "stdio"  # Alternative: "stdio"
 def create_mcp_server(port=DEFAULT_PORT):
@@ -38,6 +41,20 @@ def register_tools(mcp):
     Args:
         mcp: The MCP server instance
     """
+
+    @mcp.tool()
+    async def searching_video_on_youtube(query: str):
+        """
+        use the query to search a youtube video
+
+        This MCP tool allows AI models search for a youtube video
+
+        Args:
+            query: the keywords you want to search with(e.g., Dubai 2024 T100)
+        Returns:
+            after processing by gemini, return the youtube video link
+        """
+        return await tools_youtube_api.search_youtube_videos(query)
 
 
     @mcp.tool()
